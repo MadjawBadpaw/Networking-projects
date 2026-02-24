@@ -58,22 +58,13 @@ All results were as expected.
 I plan to extend this repository with:
 
 Switch security configurations (Port Security, DHCP Snooping, BPDU Guard)
-
 NAT configurations
-
 OSPF and multi-area OSPF
-
 Basic BGP
-
 Firewall labs (Palo Alto, ASA)
-
 VPN labs (IPsec, GRE)
-
 EVE-NG multi-router topologies
 
-Purpose of This Project
+#Purpose of This Project
 This is part of my learning path in networking and cybersecurity during my engineering degree. I am using Packet Tracer and later EVE-NG to build practical, hands-on knowledge of network design and security.
 
-• Create a professional project index page
-
-Just tell me what you want next.
