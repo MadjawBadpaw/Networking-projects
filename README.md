@@ -1,1 +1,111 @@
 # Networking-projects
+Router-on-a-Stick and ACL Control – Packet Tracer Project
+
+This project demonstrates a basic enterprise-style network in Cisco Packet Tracer.
+It includes VLAN segmentation, inter-VLAN routing using Router-on-a-Stick, centralized DHCP, and traffic filtering using extended ACLs.
+The goal of the project is to learn how networks are designed, separated, and secured in real environments.
+
+#1. Network Overview
+
+The setup contains one router, one switch, and four VLANs:
+
+VLAN 10 – HR (192.168.10.0/24)
+VLAN 20 – IT (192.168.20.0/24)
+VLAN 30 – ER (192.168.30.0/24)
+VLAN 40 – Servers (192.168.40.0/24)
+
+A single router interface (GigabitEthernet0/0) is divided into subinterfaces:
+g0/0.10 – 192.168.10.1
+g0/0.20 – 192.168.20.1
+g0/0.30 – 192.168.30.1
+g0/0.40 – 192.168.40.1
+Each subinterface handles routing for its VLAN.
+
+#2. DHCP Setup
+
+The DHCP server is placed in the Servers VLAN (VLAN 40).
+All router subinterfaces use the command:
+
+ip helper-address 192.168.40.3
+
+This forwards DHCP requests from all VLANs to the server.
+Each VLAN receives IP addresses, subnet masks, default gateways, and DNS from that DHCP server.
+
+#3. ACL Requirements
+
+To simulate basic security policies, ACLs were added to control how VLANs communicate.
+
+HR (VLAN 10)
+• Block access to ER
+• Allow access to Servers
+• Allow access to IT and other networks
+
+IT (VLAN 20)
+• Full access to all VLANs
+
+ER (VLAN 30)
+• Only allowed to access Servers
+• Blocked from HR and IT
+• Blocked from everything else
+
+Servers (VLAN 40)
+• No ACL applied so that all departments can reach servers normally
+
+ACLs are applied inbound on each VLAN subinterface.
+
+#4. ACL Configuration Summary
+
+HR-FILTER
+• Denies HR to ER
+• Allows HR to all other networks
+
+IT-FILTER
+• Allows IT to all networks
+
+ER-FILTER
+• Allows ER to Servers
+• Blocks ER from all other networks
+
+#5. Testing Performed
+
+The following tests were done from PCs in each VLAN:
+
+HR to ER: blocked
+HR to Servers: allowed
+HR to IT: allowed
+
+IT to all VLANs: allowed
+
+ER to Servers: allowed
+ER to HR: blocked
+ER to IT: blocked
+
+All results were as expected.
+
+#6. Future Work
+
+I plan to extend this repository with:
+
+Switch security configurations (Port Security, DHCP Snooping, BPDU Guard)
+
+NAT configurations
+
+OSPF and multi-area OSPF
+
+Basic BGP
+
+Firewall labs (Palo Alto, ASA)
+
+VPN labs (IPsec, GRE)
+
+EVE-NG multi-router topologies
+
+7. Purpose of This Project
+
+This is part of my learning path in networking and cybersecurity during my engineering degree.
+I am using Packet Tracer and later EVE-NG to build practical, hands-on knowledge of network design and security.
+
+
+• Create a professional project index page
+
+Just tell me what you want next.
